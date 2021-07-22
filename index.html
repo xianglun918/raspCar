@@ -34,7 +34,7 @@
     <script>
         $(function(){
             $("button").click(function(){
-                $.post("/cmd",this.id,function(data,status){});
+                $.post("/cmd", this.id, function(data,status){});
             });
         });
 
@@ -44,21 +44,21 @@
 <div id="container" class="container">
 
     <div>
-        <button id="front" class="btn btn-lg btn-primary glyphicon glyphicon-circle-arrow-up"></button>
+        <button id="forward" class="btn btn-lg btn-primary glyphicon glyphicon-circle-arrow-up"></button>
     </div>
     <div>
 
-        <button id='leftFront' class="btn btn-lg btn-primary glyphicon glyphicon-circle-arrow-left"></button>
+        <button id='leftTurn' class="btn btn-lg btn-primary glyphicon glyphicon-circle-arrow-left"></button>
         <button id='stop' class="btn btn-lg btn-primary glyphicon glyphicon-stop"></button>
-        <button id='rightFront' class="btn btn-lg btn-primary glyphicon glyphicon-circle-arrow-right"></button>
+        <button id='rightTurn' class="btn btn-lg btn-primary glyphicon glyphicon-circle-arrow-right"></button>
     </div>
     <div>
-        <button id='rear' class="btn btn-lg btn-primary glyphicon glyphicon-circle-arrow-down"></button>
+        <button id='backward' class="btn btn-lg btn-primary glyphicon glyphicon-circle-arrow-down"></button>
     </div>
-     <div>
+     <!-- <div>
         <button id='leftRear' class="btn btn-lg btn-primary glyphicon">左后转</button>
         <button id='rightRear' class="btn btn-lg btn-primary glyphicon">右后转</button>
-    <div>
+    <div> -->
 </div>
 
 <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>

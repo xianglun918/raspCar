@@ -76,52 +76,44 @@ class Car(object):
 
     # 小车后退
     def backward(self):
-        self.setup()
-        GPIO.output(self.RightBack_pin,GPIO.HIGH)
-        GPIO.output(self.LeftBack_pin,GPIO.HIGH)
+        print('Moving backward...')
+        self.leftWheel.backward()
+        self.rightWheel.backward()
+    
+    # 小车停止
+    def stop(self):
+        print('Stop...')
+        self.leftWheel.stop()
+        self.rightWheel.stop()
 
-#  leftRear函数，小车左退
-    def leftRear(self):
-        self.setup()
-        GPIO.output(self.RightBack_pin,GPIO.HIGH)
-
-#  rightRear函数，小车右退
-    def rightRear(self):
-        self.setup()
-        GPIO.output(self.LeftBack_pin,GPIO.HIGH)
-
-#  定义main主函数
+# 定义main主函数
 def main(status):
 
+    # Initialize car object
     car = Car()
-
     if status == "forward":
         car.forward()
     elif status == "leftTurn":
         car.leftTurn()
     elif status == "rightTurn":
         car.rightTurn()
-    elif status == "rear":
+    elif status == "backward":
         car.backward()
-    elif status == "leftRear":
-        car.leftRear()
-    elif status == "rightRear":
-        car.rightRear()
     elif status == "stop":
         car.setup()      
 
+# 直接测试
+if __name__ == '__main__':
 
-
-
-@get("/")
-def index():
-    return template("index")
-    
-@post("/cmd")
-def cmd():
-    adss=request.body.read().decode()
-    print("按下了按钮:"+adss)
-    main(adss)
-    return "OK"
-    
-run(host="0.0.0.0")
+    @get("/")
+    def index():
+        return template("index")
+        
+    @post("/cmd")
+    def cmd():
+        adss=request.body.read().decode()
+        print("按下了按钮:"+adss)
+        main(adss)
+        return "OK"
+        
+    run(host="0.0.0.0")
