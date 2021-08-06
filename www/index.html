@@ -2,11 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, 
-                                   initial-scale=1.0,
-                                   maximum-scale=1.0,
-                                   user-scalable=no">
-    <title>raspCar Controller</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>遥控树莓派</title>
     <link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <script src="http://code.jquery.com/jquery.js"></script>
     <style type="text/css">
@@ -22,15 +19,11 @@
              background: #bb0f5f;
             }
         .container{
-            /* padding-right: 15px;
-            padding-left: 15px;
-            margin-right: auto;
-            margin-left: auto; */
             text-align: center;
             background-color: transparent;
             border-radius: 20px;
-            width: 300px;
-            height: 350px;
+            width: 400px;
+            height: 600px;
             position: absolute;
             left: 50%;
             top: 50%;
@@ -48,11 +41,13 @@
     </script>
 </head>
 <body>
-<div id="container" class="container">
 
-   	<!-- <div>
+<div id="container" class="container">
+    
+
+   	<div>
 		    <img id="streamimage" class="xform" src="./?action=stream" />
-    </div> -->
+    </div>
     
     <div>
         <button id="forward" class="btn btn-lg btn-primary glyphicon glyphicon-circle-arrow-up"></button>
@@ -66,13 +61,13 @@
     <div>
         <button id='backward' class="btn btn-lg btn-primary glyphicon glyphicon-circle-arrow-down"></button>
     </div>
-
-    <div>
-        <button id='accelerate' class="btn btn-lg btn-primary glyphicon">加速</button>
-        <button id='decelerate' class="btn btn-lg btn-primary glyphicon">减速</button>
-    <div>
+     <!-- <div>
+        <button id='leftRear' class="btn btn-lg btn-primary glyphicon">左后转</button>
+        <button id='rightRear' class="btn btn-lg btn-primary glyphicon">右后转</button>
+    <div> -->
 </div>
 
 <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </body>
 </html>
+

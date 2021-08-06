@@ -11,7 +11,9 @@ import RPi.GPIO as GPIO
 # 自定义的模式及控制GPIO引脚
 GPIO.setmode(GPIO.BCM)
 # GPIO.setwarnings(False)
-WHEELS = ((27, 22, 18, "leftWheel"), (23, 24, 13, "rightWheel"))
+WHEELS = ((21, 22, None, "leftWheel"), (23, 24, None, "rightWheel"))
+GPIO_ENAB_PINS = [5, 6, 13, 19]
+GPIO_INX_PINS = [21, 22, 23, 24]
 
 # 定义轮子
 class Wheel:
@@ -24,8 +26,7 @@ class Wheel:
         GPIO.setup(self._pin2, GPIO.OUT)
         if pwm_pin:
             # fq是初始设定频率，频率越高响应速度越快；dc是占空比（调整速度）
-            GPIO.setup(pwm_pin, GPIO.OUT)
-            self.fq, self.dc = 50, 50 # 单位分别是 ms, %
+            self.fq, self.dc = 50, 100
             self.pwm = GPIO.PWM(pwm_pin, self.fq) # self.pwm.ChangeFrequency, self.pwm.ChangeDutyCycle
             self.pwm.start(self.dc)
     
@@ -42,14 +43,10 @@ class Wheel:
         GPIO.output(self._pin2, GPIO.LOW)
 
     def accelerate(self):
-        self.dc = min(100, self.dc + 5)
-        self.pwm.ChangeDutyCycle(self.dc)
+        self.dc = 100 if self.dc + 5 > 100 else self.dc + 5
         
     def decelerate(self):
-        self.dc = max(0, self.dc - 5)
-        self.pwm.ChangeDutyCycle(self.dc)
-    
-
+        self.dc = 0 if self.dc - 5 < 0 else self.dc - 5
 
 
 # 定义Car 类
@@ -88,47 +85,35 @@ class Car(object):
         print('Stop...')
         self.leftWheel.stop()
         self.rightWheel.stop()
-    
-    # 小车加速
-    def accelerate(self):
-        print('Accelerating...')
-        self.leftWheel.accelerate()
-        self.rightWheel.accelerate()
 
-    # 小车减速
-    def decelerate(self):
-        print('Deccelerating...')
-        self.leftWheel.decelerate()
-        self.rightWheel.decelerate()
-    
-    # 执行具体命令
-    def move(self, status):
-        options = {
-            'forward': self.forward,
-            'leftTurn': self.leftTurn,
-            'rightTurn': self.rightTurn,
-            'backward': self.backward,
-            'stop': self.stop,
-            'accelerate': self.accelerate,
-            'decelerate': self.decelerate
-        }
-        options[status]()   
+# 定义main主函数
+def main(status):
 
+    # Initialize car object
+    car = Car()
+    if status == "forward":
+        car.forward()
+    elif status == "leftTurn":
+        car.leftTurn()
+    elif status == "rightTurn":
+        car.rightTurn()
+    elif status == "backward":
+        car.backward()
+    elif status == "stop":
+        car.setup()      
 
 # 直接测试
 if __name__ == '__main__':
 
-    car = Car()
-
     @get("/")
     def index():
-        return template("index")
+        return template("runner")
         
     @post("/cmd")
     def cmd():
         adss=request.body.read().decode()
         print("按下了按钮:"+adss)
-        car.move(adss)
+        main(adss)
         return "OK"
         
     run(host="0.0.0.0", port=12345)
