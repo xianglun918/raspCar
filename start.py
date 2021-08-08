@@ -119,7 +119,7 @@ class Car(object):
 if __name__ == '__main__':
 
     car = Car()
-
+    print("\n\nUse w/a/s/d or arrow keys to control. Use space to stop.\n\n")
     @get("/")
     def index():
         return template("index")
