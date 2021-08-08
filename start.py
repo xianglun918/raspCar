@@ -103,11 +103,12 @@ class Car(object):
     
     # 执行具体命令
     def move(self, status):
+        # 这里有些线接的有些错位，所以改成错位了。
         options = {
-            'forward': self.forward,
-            'leftTurn': self.leftTurn,
-            'rightTurn': self.rightTurn,
-            'backward': self.backward,
+            'forward': self.backward,
+            'leftTurn': self.rightTurn,
+            'rightTurn': self.leftTurn,
+            'backward': self.forward,
             'stop': self.stop,
             'accelerate': self.accelerate,
             'decelerate': self.decelerate
