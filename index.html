@@ -49,6 +49,36 @@
         });
 
     </script>
+    <!-- second script -->
+    <script type="text/javascript" language=JavaScript charset="UTF-8">
+        document.onkeydown=function(event){
+            var e = event || window.event || arguments.callee.caller.arguments[0];
+            // left/up/right/down: 37/38/39/40
+            // a/w/d/s: 65/87/68/83
+            if (e && (e.keyCode == 37 || e.keyCode == 65)){
+                $.post("/cmd", "leftTurn", function(data, status){});
+            }
+            if (e && (e.keyCode == 38 || e.keyCode == 87)){
+                $.post("/cmd", "forward", function(data, status){});
+            }
+            if (e && (e.keyCode == 39 || e.keyCode == 68)){
+                $.post("/cmd", "rightTurn", function(data, status){});
+            }
+            if (e && (e.keyCode == 40 || e.keyCode == 83)){
+                $.post("/cmd", "backward", function(data, status){});
+            }
+            if (e && e.keyCode == 32){
+                $.post("/cmd", "stop", function(data, status){});
+            }
+            if (e && e.keyCode == 74){
+                $.post("/cmd", "accelerate", function(data, status){});
+            }
+            if (e && e.keyCode == 75){
+                $.post("/cmd", "decelerate", function(data, status){});
+            }
+
+        }
+    </script>
 </head>
 <body>
 <div id="container" class="container">
