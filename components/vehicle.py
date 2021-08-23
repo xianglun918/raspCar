@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 
-import time
-import sys 
+__author__ = 'xianglun918'
 
-from bottle import get,post,run,request,template
 import RPi.GPIO as GPIO
 
 
@@ -115,21 +113,3 @@ class Car(object):
         }
         options[status]()   
 
-
-# 直接测试
-if __name__ == '__main__':
-
-    car = Car()
-    print("\n\nUse w/a/s/d or arrow keys to control. Use space to stop.\n\n")
-    @get("/")
-    def index():
-        return template("index")
-        
-    @post("/cmd")
-    def cmd():
-        adss=request.body.read().decode()
-        print("按下了按钮:"+adss)
-        car.move(adss)
-        return "OK"
-        
-    run(host="0.0.0.0", port=12345)
