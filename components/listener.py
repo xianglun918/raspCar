@@ -1,9 +1,12 @@
+__author__ = 'xianglun918'
+
 import keyboard
 
 class KeyListener:
     def __init__(self, car):
-        self.set_mode()
         self.car = car
+        self.set_mode()
+        
 
     def set_mode(self):
         yes_list = ('y', 'yes')
@@ -27,6 +30,7 @@ class KeyListener:
     
     def event_trigger(self, x):
         if x.name == 'esc':
+            print('esc pressed...')
             keyboard.unhook_all()
         elif x.name == 'w' or x.name == 'up':
             self.car.move('forward')

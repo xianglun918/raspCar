@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
+import time, os
 from bottle import get, post, run, request, template
 from components.vehicle import Car
 from components.listener import KeyListener
@@ -10,7 +10,7 @@ def main():
 
     # 初始化
     car = Car()
-    keyboard_control = keyListener(car)
+    keyboard_control = KeyListener(car)
 
     # 网络服务初始化
     @get("/")
