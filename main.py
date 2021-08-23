@@ -1,9 +1,12 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 from bottle import get, post, run, request, template
 from components.vehicle import Car
-from components.keyListener import keyListener
+from components.listener import KeyListener
 
 # 直接测试，Web业务
-if __name__ == '__main__':
+def main():
 
     # 初始化
     car = Car()
@@ -22,3 +25,7 @@ if __name__ == '__main__':
         return "OK"
         
     run(host="0.0.0.0", port=12345)
+
+
+if __name__ == '__main__':
+    main()
