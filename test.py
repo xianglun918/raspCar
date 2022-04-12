@@ -2,12 +2,12 @@
 # -*- coding:utf-8 -*-
 
 import time
-import sys 
+import sys
 
-from bottle import get,post,run,request,template
+from bottle import get, post, run, request, template
 import RPi.GPIO as GPIO
-GPIO.setmode(GPIO.BCM)
 
+GPIO.setmode(GPIO.BCM)
 
 while True:
     # 自定义的模式及控制GPIO引脚
