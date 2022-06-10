@@ -1,9 +1,12 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import time, os
+import os
+import time
+
 from bottle import get, post, run, request, template
-from components.vehicle import Car
+
 from components.listener import KeyListener
+from components.vehicle import Car
 
 
 # 直接测试，Web业务
@@ -15,7 +18,7 @@ def main():
     # 网络服务初始化
     @get("/")
     def index():
-        return template("index")
+        return template("panels/index")
 
     @post("/cmd")
     def cmd():
