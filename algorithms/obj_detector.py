@@ -2,10 +2,14 @@ import cv2
 import os
 import logging
 
+from os.path import dirname
+
+_DEFAULT_MODEL_FILE = os.path.join(dirname(__file__), "haarcascade_models/haarcascade_frontalface_default.xml")
+
 
 class ObjDetector:
 
-    def __init__(self, model_file: str = "./haarcascade_models/haarcascade_frontalface_default.xml"):
+    def __init__(self, model_file: str = _DEFAULT_MODEL_FILE):
         model_file = os.path.realpath(model_file)
         self._verify_file(model_file)
         self._model_file = model_file
