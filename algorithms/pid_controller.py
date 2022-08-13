@@ -18,16 +18,20 @@ class PIDController:
         self._i_term = .0
         self._p_term = .0
 
-    def reset(self):
+    def reset(self) -> None:
+        """Reset pid parameters to zeros.
+        """
         self._p_term = .0
         self._i_term = .0
         self._d_term = .0
         self._last_error = .0
         self._value = .0
 
-    def update(self, feedback_val: float):
+    def update(self, cur_value: float) -> float:
+        """Update current value to pid model, generate feedback.
+        """
         # calculate error
-        error = self.expected_value - feedback_val
+        error = self.expected_value - cur_value
 
         # time elapses
         self._cur_time = time.time()

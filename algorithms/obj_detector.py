@@ -15,13 +15,24 @@ class ObjDetector:
         self._model_file = model_file
         self._model = cv2.CascadeClassifier(self._model_file)
 
-    def update_model(self, model_file):
+    def update_model(self, model_file: str):
+        """
+        Update the model used by ObjDetector as a Haar Cascade Classifier.
+
+        Args:
+            model_file: str
+                The path to the model file used. (xml structure file expected.)
+
+        Returns:
+            None
+        """
         model_file = os.path.realpath(model_file)
         self._verify_file(model_file)
         self._model_file = model_file
         self._model = cv2.CascadeClassifier(self._model_file)
 
     def detect_objects(self, gray_image):
+        """Detect the objects within input gray-scale image."""
         try:
             objects = self._model.detectMultiScale(gray_image)
         except Exception as e:
@@ -51,18 +62,14 @@ if __name__ == "__main__":
     plt.figure(figsize=(400, 300), dpi=300)
     plt.subplot(1, 2, 1)
     plt.imshow(imutils.opencv2matplotlib(img))
-    plt.title('Original')
     plt.subplot(1, 2, 2)
     plt.imshow(imutils.opencv2matplotlib(roi))
-    plt.title('Detected')
-
-    print(result)
+    print("detected x, y, w, h is: ", result)
     while 1:
-        cv2.imshow('Result', roi)
-        cv2.imshow('Original', img)
+        cv2.imshow('Result, Press <esc> to exit', roi)
+        cv2.imshow('Original, Press <esc> to exit', img)
 
         k = cv2.waitKey(1) & 0xff
         if k == 27:
-            # cv2.imwrite("canny_test_future.jpg", result)
             break
     cv2.destroyAllWindows()
